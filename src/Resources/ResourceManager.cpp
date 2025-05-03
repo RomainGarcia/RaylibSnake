@@ -20,7 +20,11 @@ std::shared_ptr<Texture2D> RE::ResourceManager::RegisterTexture(const std::strin
 
 std::shared_ptr<Sound> RE::ResourceManager::RegisterSound(const std::string& name, const std::string& path) {
     return m_Sounds.Get(name, [path](const std::string&) {
-        return LoadSound(path.c_str());
+        Sound sound = LoadSound(path.c_str());
+        if (sound.stream.buffer == nullptr) {
+            TraceLog(LOG_ERROR, TextFormat("Failed to load sound: %s", path.c_str()));
+        }
+        return sound;
     });
 }
 

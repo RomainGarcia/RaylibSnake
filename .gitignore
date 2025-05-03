@@ -2,6 +2,7 @@
 .vscode/
 .vs/
 cmake-build-*/
+wasm-dist/
 bin/
 build/
 out/

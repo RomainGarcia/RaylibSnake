@@ -15,6 +15,10 @@ RE::Game::Game() {
     RE::Audio::Init(); // Needs to be called before adding sounds
 
     auto eatSound = ResourceManager::Instance().RegisterSound("eat", "assets/sounds/eat.mp3");
+    if (eatSound == nullptr) {
+        TraceLog(LOG_ERROR, "Failed to load sound: %s", "eat");
+    }
+
     auto wellSound = ResourceManager::Instance().RegisterSound("wall", "assets/sounds/wall.mp3");
     SetSoundVolume(*eatSound, 0.5f);
     SetSoundVolume(*wellSound, 0.5f);
